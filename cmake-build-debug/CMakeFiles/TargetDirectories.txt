@@ -1,0 +1,3 @@
+C:/Users/knutf/UFC-Simulator/cmake-build-debug/CMakeFiles/UFC_Simulator.dir
+C:/Users/knutf/UFC-Simulator/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/knutf/UFC-Simulator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
