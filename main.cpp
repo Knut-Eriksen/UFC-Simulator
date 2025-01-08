@@ -5,11 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <random>
-
-
-
-
-
+#include "fighters.h"
 
 class FightCommentary{
 };
@@ -19,23 +15,7 @@ class UserInterface{
 
 int weightClasses[7] = {135, 145, 155, 170, 185, 205, 255};
 
-class Fighter {
-public:
-    int ID;
-    std::string name;
-    std::string gender;
-    std::string nationality;
-    int rank;
-    int weightClass;
-    int striking;
-    int grappling;
-    int stamina;
 
-    Fighter(int ID, const std::string& name, const std::string& gender, const std::string& nationality,
-            int rank, int weightClass, int striking, int grappling, int stamina)
-            : ID(ID), name(name), gender(gender), nationality(nationality),
-              rank(rank), weightClass(weightClass), striking(striking), grappling(grappling), stamina(stamina) {}
-};
 
 class Match{
 public:
@@ -99,43 +79,16 @@ public:
 
 
 
-    int main() {
-        Tournament UFC_Tournament;
-        std::vector<Fighter> HW;
-
-        HW.emplace_back(1, "Jon Jones", "Male", "USA", 1, 255, 95, 92, 94);
-        HW.emplace_back(2, "Tom Aspinall", "Male", "UK", 2, 255, 92, 90, 89);
-        HW.emplace_back(3, "Ciryl Gane", "Male", "France", 3, 255, 94, 70, 88);
-        HW.emplace_back(4, "Alexander Volkov", "Male", "Russia", 4, 255, 91, 65, 86);
-        HW.emplace_back(5, "Sergei Pavlovich", "Male", "Russia", 5, 255, 93, 60, 87);
-        HW.emplace_back(6, "Curtis Blaydes", "Male", "USA", 6, 255, 85, 92, 88);
-        HW.emplace_back(7, "Jailton Almeida", "Male", "Brazil", 7, 255, 78, 95, 85);
-        HW.emplace_back(8, "Serghei Spivac", "Male", "Moldova", 8, 255, 83, 90, 84);
-        HW.emplace_back(9, "Marcin Tybura", "Male", "Poland", 9, 255, 80, 85, 83);
-        HW.emplace_back(10, "Jairzinho Rozenstruik", "Male", "Suriname", 10, 255, 88, 60, 82);
-        HW.emplace_back(11, "Derrick Lewis", "Male", "USA", 11, 255, 90, 58, 80);
-        HW.emplace_back(12, "Tai Tuivasa", "Male", "Australia", 12, 255, 87, 55, 78);
-        HW.emplace_back(13, "Marcos Rogerio de Lima", "Male", "Brazil", 13, 255, 82, 70, 79);
-        HW.emplace_back(14, "Waldo Cortes Acosta", "Male", "Dominican Republic", 14, 255, 81, 68, 77);
-        HW.emplace_back(15, "Shamil Gaziev", "Male", "Russia", 15, 255, 79, 66, 76);
-        HW.emplace_back(16, "Mick Parkin", "Male", "UK", 16, 255, 78, 65, 75);
-
-        UFC_Tournament.simulateTournament(HW);
+int main() {
+    Tournament UFC_Tournament;
+    populateFighters();
 
 
 
-        /*
-        for (const auto &fighter: HW) {
-            std::cout << fighter.ID << ", "
-                      << fighter.name << ", "
-                      << fighter.gender << ", "
-                      << fighter.nationality << ", "
-                      << fighter.rank << ", "
-                      << fighter.weightClass << ", "
-                      << fighter.striking << ", "
-                      << fighter.grappling << ", "
-                      << fighter.stamina << std::endl;
-        }
-*/
-        return 0;
-    }
+
+    UFC_Tournament.simulateTournament(HW);
+    UFC_Tournament.simulateTournament(LW);
+
+
+    return 0;
+}
