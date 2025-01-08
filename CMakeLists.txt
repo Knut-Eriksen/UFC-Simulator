@@ -3,4 +3,6 @@ project(UFC_Simulator)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(UFC_Simulator main.cpp)
+add_executable(UFC_Simulator main.cpp
+        fighters.cpp
+        fighters.h)
