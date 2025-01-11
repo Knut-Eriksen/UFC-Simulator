@@ -9,7 +9,6 @@ std::vector<Fighter> FW;
 std::vector<Fighter> BW;
 std::vector<Fighter> FLW;
 
-
 void populateFighters(){
     HW.emplace_back("Jon Jones", "USA", 1, 95, 92, 94);
     HW.emplace_back("Tom Aspinall", "UK", 2, 92, 90, 89);
@@ -31,10 +30,10 @@ void populateFighters(){
     // Light Heavyweight
     LHW.emplace_back("Alex Pereira", "Brazil", 1, 96, 82, 94);
     LHW.emplace_back("Magomed Ankalaev", "Russia", 2, 88, 92, 90);
-    LHW.emplace_back("Jiří Procházka", "Czech Republic", 3, 94, 78, 93);
+    LHW.emplace_back("Jiri Prochazka", "Czech Republic", 3, 94, 78, 93);
     LHW.emplace_back("Jamahal Hill", "USA", 4, 89, 75, 91);
-    LHW.emplace_back("Jan Błachowicz", "Poland", 5, 85, 82, 90);
-    LHW.emplace_back("Aleksandar Rakić", "Austria", 6, 83, 86, 87);
+    LHW.emplace_back("Jan Blachowicz", "Poland", 5, 85, 82, 90);
+    LHW.emplace_back("Aleksandar Rakic", "Austria", 6, 83, 86, 87);
     LHW.emplace_back("Carlos Ulberg", "New Zealand", 7, 84, 80, 85);
     LHW.emplace_back("Khalil Rountree Jr.", "USA", 8, 88, 65, 84);
     LHW.emplace_back("Nikita Krylov", "Ukraine", 9, 82, 85, 83);
@@ -154,7 +153,4 @@ void populateFighters(){
     FLW.emplace_back("Bruno Silva", "Brazil", 14, 75, 78, 75);
     FLW.emplace_back("Kai Asakura", "Japan", 15, 76, 75, 74);
     FLW.emplace_back("Joshua Van", "USA", 16, 74, 73, 72);
-
-
-
 }

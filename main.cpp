@@ -1,28 +1,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <ctime>
-#include <cstdlib>
 #include <random>
 #include "fighters.h"
 
 class FightCommentary{
 };
 
-class UserInterface{
-};
-
-int weightClasses[7] = {135, 145, 155, 170, 185, 205, 255};
-
-
-
 class Match{
 public:
     Fighter simulateMatch(Fighter& fighter1, Fighter& fighter2) {
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dist(-10, 10);
+        std::uniform_int_distribution<> dist(-5, 5);
 
         float fighter1OverallScore = fighter1.striking * 0.5 + fighter1.grappling * 0.3 + fighter1.stamina * 0.2 + dist(gen);
         float fighter2OverallScore = fighter2.striking * 0.5 + fighter2.grappling * 0.3 + fighter2.stamina * 0.2 + dist(gen);
@@ -41,11 +31,6 @@ class Tournament {
 public:
 
     void simulateTournament(std::vector<Fighter> &fighters){
-        std::cout << "Fighters seeded by this ranking:\n";
-        for (const auto& fighter : fighters) {
-            std::cout << fighter.rank << ". " << fighter.name << "\n";
-        }
-
         std::vector<Fighter> currentRound;
         std::vector<Fighter> nextRound;
         Match match;
@@ -71,24 +56,16 @@ public:
             nextRound.clear();
             std::cout << "\n";
         }
-
-     }
+    }
 };
-
-
-
-
 
 int main() {
     Tournament UFC_Tournament;
     populateFighters();
 
+    std::cout << "******************** UFC-Simulator ********************\n";
 
-
-
-    UFC_Tournament.simulateTournament(HW);
     UFC_Tournament.simulateTournament(LW);
-
 
     return 0;
 }
