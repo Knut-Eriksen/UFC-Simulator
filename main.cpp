@@ -36,19 +36,20 @@ public:
         Match match;
         std::cout << "\nThe first round match ups are:" << "\n";
 
-        int n = fighters.size();
-        for (int i = 0; i < n / 2; ++i) {
-            std::cout << fighters[i].name << " vs " << fighters[n - 1 - i].name << "\n";
+        int weightClassSize = fighters.size();
+        for (int i = 0; i < weightClassSize / 2; ++i) {
+            std::cout << fighters[i].name << " vs " << fighters[weightClassSize - 1 - i].name << "\n";
 
             currentRound.push_back(fighters[i]);
-            currentRound.push_back(fighters[n - 1 - i]);
+            currentRound.push_back(fighters[weightClassSize - 1 - i]);
         }
 
         std::cout << "\n";
 
         while (currentRound.size() > 1) {
             for (int i = 0; i < currentRound.size(); i += 2) {
-                Fighter winner = match.simulateMatch(currentRound[i], currentRound[i + 1]);
+                int currentRoundSize = currentRound.size();
+                Fighter winner = match.simulateMatch(currentRound[i], currentRound[currentRoundSize - 1 - i]);
                 nextRound.push_back(winner);
             }
 
@@ -58,6 +59,8 @@ public:
         }
     }
 };
+
+
 
 int main() {
     Tournament UFC_Tournament;

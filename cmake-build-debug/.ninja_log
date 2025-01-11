@@ -1,11 +1,6 @@
 # ninja log v5
-407	515	7580551039937442	UFC_Simulator.exe	85957e257a852c0f
-3	398	7580551039006627	CMakeFiles/UFC_Simulator.dir/fighters.cpp.obj	f40eba2282e2751a
-3	402	7580555465594867	CMakeFiles/UFC_Simulator.dir/main.cpp.obj	e256b95480e74a1f
-0	657	7580564929991914	CMakeFiles/UFC_Simulator.dir/fighters.cpp.obj	f40eba2282e2751a
-657	769	7580564930880008	UFC_Simulator.exe	85957e257a852c0f
-0	898	7580580550472478	CMakeFiles/UFC_Simulator.dir/fighters.cpp.obj	f40eba2282e2751a
-898	1052	7580580551757646	UFC_Simulator.exe	85957e257a852c0f
-1	429	7580580989583935	CMakeFiles/UFC_Simulator.dir/main.cpp.obj	e256b95480e74a1f
-4	502	7580580990293978	CMakeFiles/UFC_Simulator.dir/fighters.cpp.obj	f40eba2282e2751a
-502	619	7580580991199077	UFC_Simulator.exe	85957e257a852c0f
+1	408	7583196697653791	CMakeFiles/UFC_Simulator.dir/main.cpp.obj	e256b95480e74a1f
+5	483	7583196698393845	CMakeFiles/UFC_Simulator.dir/fighters.cpp.obj	f40eba2282e2751a
+484	716	7583196700580163	UFC_Simulator.exe	85957e257a852c0f
+0	358	7583200629631342	CMakeFiles/UFC_Simulator.dir/main.cpp.obj	e256b95480e74a1f
+358	456	7583200630401395	UFC_Simulator.exe	85957e257a852c0f
