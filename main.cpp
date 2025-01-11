@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <cctype>
 #include "fighters.h"
 
 class FightCommentary{
@@ -29,6 +30,10 @@ public:
 
 class Tournament {
 public:
+    int tournamentId;
+    std::string name;
+
+    Tournament(int tournamentId, const std::string& name) : tournamentId(tournamentId), name(name) {}
 
     void simulateTournament(std::vector<Fighter> &fighters){
         std::vector<Fighter> currentRound;
@@ -57,18 +62,103 @@ public:
             nextRound.clear();
             std::cout << "\n";
         }
+
+
+
     }
+
+};
+
+class UserInterface {
+public:
+    void displayMenu() {
+        int choice;
+        std::cout << "******************** UFC-Simulator ********************\n";
+        std::cout << "1. Start a Tournament\n";
+        std::cout << "2. View Fighter Stats\n";
+        std::cout << "3. Exit\n";
+        std::cout << "******************************************************\n";
+        std::cout << "Please enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                startTournament();
+                break;
+            case 2:
+                chooseweighClass();
+        }
+    }
+
+    void startTournament(){
+        int tournamentCount = 0;
+        std::string tournamentName;
+        std::cout << "Enter a tournament name: ";
+        std::cin.ignore();
+        std::getline(std::cin >> std::ws, tournamentName);
+        tournamentCount += 1;
+
+        Tournament UFCTournament(tournamentCount, tournamentName);
+    }
+
+    void chooseweighClass(){
+        std::string weightClass;
+
+        do {
+            std::cout << "Choose a weight class to view fighter stats.\n";
+            std::cout << "HW. Heavyweight\n";
+            std::cout << "LHW. Heavyweight\n";
+            std::cout << "MW. Heavyweight\n";
+            std::cout << "WW. Heavyweight\n";
+            std::cout << "LW. Heavyweight\n";
+            std::cout << "FW. Heavyweight\n";
+            std::cout << "BW. Heavyweight\n";
+            std::cout << "FLW. Heavyweight\n";
+            std::cout << "FLW. Heavyweight\n";
+            std::cout << "Enter weight class in format of 'HW' or Exit: ";
+            std::getline(std::cin >> std::ws, weightClass);
+
+            for (char& ch : weightClass) {
+                ch = toupper(ch);
+            }
+            if (weightClass == "HW"){
+                Fighter::displayWeightClassStats(HW);
+            } else if (weightClass == "LHW"){
+                Fighter::displayWeightClassStats(LHW);
+            }else if (weightClass == "MW"){
+                Fighter::displayWeightClassStats(MW);
+            }else if (weightClass == "WW"){
+                Fighter::displayWeightClassStats(WW);
+            }else if (weightClass == "LW"){
+                Fighter::displayWeightClassStats(LW);
+            }else if (weightClass == "BW"){
+                Fighter::displayWeightClassStats(BW);
+            }else if (weightClass == "FLW"){
+                Fighter::displayWeightClassStats(FLW);
+            }
+        }while(weightClass != "EXIT");
+
+    }
+
+
+
+
 };
 
 
 
+
 int main() {
-    Tournament UFC_Tournament;
     populateFighters();
+    UserInterface UserInterface;
+    UserInterface.displayMenu();
 
-    std::cout << "******************** UFC-Simulator ********************\n";
 
-    UFC_Tournament.simulateTournament(LW);
+
+
+
+
+
 
     return 0;
 }

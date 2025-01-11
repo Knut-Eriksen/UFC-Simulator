@@ -9,6 +9,8 @@ std::vector<Fighter> FW;
 std::vector<Fighter> BW;
 std::vector<Fighter> FLW;
 
+
+
 void populateFighters(){
     HW.emplace_back("Jon Jones", "USA", 1, 95, 92, 94);
     HW.emplace_back("Tom Aspinall", "UK", 2, 92, 90, 89);

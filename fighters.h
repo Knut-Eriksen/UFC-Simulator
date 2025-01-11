@@ -18,6 +18,14 @@ public:
             int rank, int striking, int grappling, int stamina)
             : name(name), nationality(nationality),
               rank(rank), striking(striking), grappling(grappling), stamina(stamina) {}
+
+    static void displayWeightClassStats(const std::vector<Fighter> &fighters){
+        for (int i = 0; i < fighters.size(); ++i) {
+            std::cout << fighters[i].rank << ". " << fighters[i].name << " - Striking: " << fighters[i].striking << " - Grappling: " << fighters[i].grappling << " - Stamina: " << fighters[i].stamina << "\n";
+        }
+    }
+
+
 };
 
 extern std::vector<Fighter> HW;
