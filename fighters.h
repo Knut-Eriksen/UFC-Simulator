@@ -24,8 +24,6 @@ public:
             std::cout << fighters[i].rank << ". " << fighters[i].name << " - Striking: " << fighters[i].striking << " - Grappling: " << fighters[i].grappling << " - Stamina: " << fighters[i].stamina << "\n";
         }
     }
-
-
 };
 
 extern std::vector<Fighter> HW;

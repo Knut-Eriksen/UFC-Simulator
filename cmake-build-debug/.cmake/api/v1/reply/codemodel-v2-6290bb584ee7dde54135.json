@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/knutf/UFC-Simulator/cmake-build-debug",
-		"source" : "C:/Users/knutf/UFC-Simulator"
+		"build" : "C:/Users/Knut/UFC-Simulator/cmake-build-debug",
+		"source" : "C:/Users/Knut/UFC-Simulator"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 6
+		"minor" : 7
 	}
 }

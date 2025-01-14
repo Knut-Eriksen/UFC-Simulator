@@ -10,6 +10,7 @@ class FightCommentary{
 
 class Match{
 public:
+
     Fighter simulateMatch(Fighter& fighter1, Fighter& fighter2) {
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -27,6 +28,7 @@ public:
         }
     }
 };
+
 
 class Tournament {
 public:
@@ -62,35 +64,55 @@ public:
             nextRound.clear();
             std::cout << "\n";
         }
-
-
-
     }
+
 
 };
 
+std::vector<Tournament> saveFiles;
+
+
+
 class UserInterface {
 public:
+
+
     void displayMenu() {
         int choice;
-        std::cout << "******************** UFC-Simulator ********************\n";
-        std::cout << "1. Start a Tournament\n";
-        std::cout << "2. View Fighter Stats\n";
-        std::cout << "3. Exit\n";
-        std::cout << "******************************************************\n";
-        std::cout << "Please enter your choice: ";
-        std::cin >> choice;
 
-        switch (choice) {
-            case 1:
-                startTournament();
-                break;
-            case 2:
-                chooseweighClass();
+        do {
+            std::cout << "******************** UFC-Simulator ********************\n";
+            std::cout << "1. Start a Tournament\n";
+            std::cout << "2. Load Tournament\n";
+            std::cout << "3. View Fighter Stats\n";
+            std::cout << "4. Exit\n";
+            std::cout << "******************************************************\n";
+            std::cout << "Please enter your choice: ";
+            std::cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    startTournament();
+                    break;
+                case 2:
+                    loadTournament(saveFiles);
+                    break;
+                case 3:
+                    chooseweighClass();
+                    break;
+
+            }
+        }while(choice != 3);
+
+    }
+
+    void loadTournament(std::vector<Tournament> &saveFiles){
+        for (int i = 0; i < saveFiles.size(); ++i) {
+            std::cout << saveFiles[i].tournamentId << ". " << saveFiles[i].name << "\n";
         }
     }
 
-    void startTournament(){
+    void startTournament() {
         int tournamentCount = 0;
         std::string tournamentName;
         std::cout << "Enter a tournament name: ";
@@ -99,6 +121,46 @@ public:
         tournamentCount += 1;
 
         Tournament UFCTournament(tournamentCount, tournamentName);
+        saveFiles.push_back(UFCTournament);
+        chooseWeightSimulation(UFCTournament);
+    }
+
+    void chooseWeightSimulation(Tournament& UFCTournament){
+        std::string weightClass;
+
+        do {
+            std::cout << "Choose a weight class to view fighter stats.\n";
+            std::cout << "HW. Heavyweight\n";
+            std::cout << "LHW. Heavyweight\n";
+            std::cout << "MW. Heavyweight\n";
+            std::cout << "WW. Heavyweight\n";
+            std::cout << "LW. Heavyweight\n";
+            std::cout << "FW. Heavyweight\n";
+            std::cout << "BW. Heavyweight\n";
+            std::cout << "FLW. Heavyweight\n";
+            std::cout << "FLW. Heavyweight\n";
+            std::cout << "Enter weight class in format of 'HW' or Exit: ";
+            std::getline(std::cin >> std::ws, weightClass);
+
+            for (char& ch : weightClass) {
+                ch = toupper(ch);
+            }
+            if (weightClass == "HW"){
+                UFCTournament.simulateTournament(HW);
+            } else if (weightClass == "LHW"){
+                UFCTournament.simulateTournament(LHW);
+            }else if (weightClass == "MW"){
+                UFCTournament.simulateTournament(MW);
+            }else if (weightClass == "WW"){
+                UFCTournament.simulateTournament(WW);
+            }else if (weightClass == "LW"){
+                UFCTournament.simulateTournament(LW);
+            }else if (weightClass == "BW"){
+                UFCTournament.simulateTournament(BW);
+            }else if (weightClass == "FLW"){
+                UFCTournament.simulateTournament(FLW);
+            }
+        }while(weightClass != "EXIT");
     }
 
     void chooseweighClass(){
@@ -137,28 +199,13 @@ public:
                 Fighter::displayWeightClassStats(FLW);
             }
         }while(weightClass != "EXIT");
-
     }
-
-
-
-
 };
-
-
-
 
 int main() {
     populateFighters();
     UserInterface UserInterface;
     UserInterface.displayMenu();
-
-
-
-
-
-
-
 
     return 0;
 }
