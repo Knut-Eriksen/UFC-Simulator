@@ -2,21 +2,24 @@
 #include <string>
 #include <vector>
 #include <random>
-#include <cctype>
 #include "fighters.h"
+#include <ctime>
+
+void initRandomNumber(){
+    srand(time(NULL));
+}
 
 class FightCommentary{
 public:
 
     std::vector<std::string> closeFight = {
-            "Both fighters are giving it their all, leaving everything in the cage.",
-            "It's a razor-thin battle, with neither fighter willing to back down.",
-            "Every exchange is met with an answer; this is anyone's fight to win.",
-            "The crowd is on the edge of their seats as the fight remains dead even.",
-            "Both fighters are trading blow for blow, refusing to give an inch.",
-            "What an evenly matched contest; the judges will have a tough decision here."
+            "gave it their all, leaving everything in the cage, and emerged victorious.",
+            "fought in a razor-thin battle, with neither willing to back down, but secured the win.",
+            "exchanged blow for blow in an even contest and managed to edge out the victory.",
+            "kept the crowd on the edge of their seats in a dead-even fight and came out on top.",
+            "traded strikes evenly in an incredible contest but found a way to secure the win.",
+            "battled through an evenly matched fight, leaving the judges with a tough decision, but took the victory."
     };
-
 
     std::vector<std::string> strikingAdvantage = {
             "landed some crisp strikes, overwhelming.",
@@ -46,42 +49,42 @@ public:
     };
 
     std::vector<std::string> underdog = {
-            "defied the odds with a stunning performance, shocking everyone.",
-            "overcame adversity to put on a career-defining fight.",
-            "proved the doubters wrong, delivering a breathtaking upset victory.",
-            "showed heart and determination, turning the tide in their favor.",
-            "displayed resilience, refusing to back down against a tough opponent.",
-            "pulled off an incredible upset, leaving the audience in awe."
+            "defied the odds with a stunning performance and emerged victorious, shocking everyone.",
+            "overcame adversity to put on a career-defining fight and claimed a hard-fought win.",
+            "proved the doubters wrong by delivering a breathtaking upset victory and taking home the win.",
+            "showed heart and determination, turning the tide in their favor to secure the triumph.",
+            "displayed resilience, refusing to back down and ultimately defeating a tough opponent.",
+            "pulled off an incredible upset, winning the fight and leaving the audience in awe."
     };
 
-    std::vector<std::string> favourite = {
-            "lived up to expectations with a dominant display.",
-            "showcased why they were the favorite, controlling the fight effortlessly.",
-            "delivered a clinical performance, leaving no doubt about their skill level.",
-            "proved their class with an impressive and well-rounded showing.",
-            "executed their game plan perfectly, securing a decisive victory.",
-            "demonstrated their superior skill set, dominating every aspect of the fight."
-    };
-
-
-    std::vector<std::string> commentary = {
-            "A thunderous right hand lands!",
-            "What a takedown! The crowd goes wild!",
-            "A beautifully timed counter!",
-            "The stamina of these fighters is being pushed to the limit.",
-            "A brutal exchange in the center of the cage!",
-            "An explosive head kick nearly ends the fight!"
-    };
-
-    void fightCommentary(Fighter& winner, Fighter& loser){
-        std::string comment;
-
-
-
-
+    int randomNumber(){
+        int randomIndex = (rand() % 4) + 0;
+        return randomIndex;
     }
 
+    void fightCommentary(Fighter& winner, Fighter& loser) {
+        int strikingDifference = winner.striking - loser.striking;
+        int grapplingDifference = winner.grappling - loser.grappling;
+        int staminaDifference = winner.stamina - loser.stamina;
 
+        int largest = std::max({strikingDifference, grapplingDifference, staminaDifference});
+
+        bool isUnderdog = winner.rank > loser.rank;
+
+        if (isUnderdog){
+            std::cout << winner.name << " " << underdog[randomNumber()] << std::endl;
+        } else if (largest > 9) {
+            if (strikingDifference == largest) {
+                std::cout << winner.name << " " << strikingAdvantage[randomNumber()] << std::endl;
+            } else if (grapplingDifference == largest) {
+                std::cout << winner.name << " " << grapplingAdvantage[randomNumber()] << std::endl;
+            } else if (staminaDifference == largest) {
+                std::cout << winner.name << " " << staminaAdvantage[randomNumber()] << std::endl;
+            }
+        } else {
+            std::cout << winner.name << " " << closeFight[randomNumber()] << std::endl;
+        }
+    }
 };
 
 class Match{
@@ -97,19 +100,14 @@ public:
         float fighter2OverallScore = fighter2.striking * 0.5 + fighter2.grappling * 0.3 + fighter2.stamina * 0.2 + dist(gen);
 
         if (fighter1OverallScore > fighter2OverallScore) {
-            std::cout << fighter1.name << " defeats " << fighter2.name << "!\n";
-
             commentary.fightCommentary(fighter1, fighter2);
             return fighter1;
         } else {
             commentary.fightCommentary(fighter2, fighter1);
-            std::cout << fighter2.name << " defeats " << fighter1.name << "!\n";
-
             return fighter2;
         }
     }
 };
-
 
 class Tournament {
 public:
@@ -130,6 +128,7 @@ public:
             for (int i = 0; i < currentRound.size() / 2; ++i) {
                 std::cout << currentRound[i].name << " vs " << currentRound[currentRound.size() - 1 - i].name << "\n";
                 Fighter winner = match.simulateMatch(currentRound[i], currentRound[currentRound.size() - 1 - i]);
+                std::cout << "******************************************************" << std::endl;
                 nextRound.push_back(winner);
             }
 
@@ -139,14 +138,11 @@ public:
         }
 
         if (!currentRound.empty()) {
-            std::cout << "The tournament winner is: " << currentRound[0].name << "!\n";
+            std::cout << "The tournament winner is: " << currentRound[0].name << "!\n\n";
+            std::cout << "******************************************************\n" << std::endl;
         }
     }
-
-
-
 };
-
 
 class UserInterface {
 public:
@@ -161,6 +157,12 @@ public:
             std::cout << "******************************************************" << std::endl;
             std::cout << "Please enter your choice: ";
             std::cin >> choice;
+
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number between 1-3." << std::endl;
+            }
 
             switch (choice) {
                 case 1:
@@ -185,15 +187,14 @@ public:
         chooseWeightSimulation(UFCTournament);
     }
 
+    std::vector<std::string> weightClasses = {
+            "Heavyweight", "Light Heavyweight", "Middleweight",
+            "Welterweight", "Lightweight", "Featherweight",
+            "Bantamweight", "Flyweight"
+    };
+
     void chooseWeightSimulation(Tournament& UFCTournament) {
-        std::vector<std::string> weightClasses = {
-                "Heavyweight", "Light Heavyweight", "Middleweight",
-                "Welterweight", "Lightweight", "Featherweight",
-                "Bantamweight", "Flyweight"
-        };
-
         std::vector<bool> simulated(weightClasses.size(), false);
-
         int choice = 0;
 
         while(true){
@@ -254,50 +255,54 @@ public:
         }
     }
 
-
     void chooseweighClass(){
-        std::string weightClass;
-
+        int weightClass;
         do {
             std::cout << "Choose a weight class to view fighter stats.\n";
-            std::cout << "HW. Heavyweight\n";
-            std::cout << "LHW. Heavyweight\n";
-            std::cout << "MW. Heavyweight\n";
-            std::cout << "WW. Heavyweight\n";
-            std::cout << "LW. Heavyweight\n";
-            std::cout << "FW. Heavyweight\n";
-            std::cout << "BW. Heavyweight\n";
-            std::cout << "FLW. Heavyweight\n";
-            std::cout << "FLW. Heavyweight\n";
-            std::cout << "Enter weight class in format of 'HW' or Exit: ";
-            std::getline(std::cin >> std::ws, weightClass);
+            for (int i = 0; i < weightClasses.size(); ++i) {
+                std::cout << i + 1 << ". " << weightClasses[i] << std::endl;
+            }
+            std::cout << "Enter the number of the weight or '9' to Exit: ";
+            std::cin >> weightClass;
 
-            for (char& ch : weightClass) {
-                ch = toupper(ch);
+            switch (weightClass) {
+                case 1:
+                    Fighter::displayWeightClassStats(HW);
+                    break;
+                case 2:
+                    Fighter::displayWeightClassStats(LHW);
+                    break;
+                case 3:
+                    Fighter::displayWeightClassStats(MW);
+                    break;
+                case 4:
+                    Fighter::displayWeightClassStats(WW);
+                    break;
+                case 5:
+                    Fighter::displayWeightClassStats(LW);
+                    break;
+                case 6:
+                    Fighter::displayWeightClassStats(FW);
+                    break;
+                case 7:
+                    Fighter::displayWeightClassStats(BW);
+                    break;
+                case 8:
+                    Fighter::displayWeightClassStats(FLW);
+                    break;
+                case 9:
+                    break;
+                default:
+                    break;
             }
-            if (weightClass == "HW"){
-                Fighter::displayWeightClassStats(HW);
-            } else if (weightClass == "LHW"){
-                Fighter::displayWeightClassStats(LHW);
-            }else if (weightClass == "MW"){
-                Fighter::displayWeightClassStats(MW);
-            }else if (weightClass == "WW"){
-                Fighter::displayWeightClassStats(WW);
-            }else if (weightClass == "LW"){
-                Fighter::displayWeightClassStats(LW);
-            }else if (weightClass == "BW"){
-                Fighter::displayWeightClassStats(BW);
-            }else if (weightClass == "FLW"){
-                Fighter::displayWeightClassStats(FLW);
-            }
-        }while(weightClass != "EXIT");
+        }while(weightClass != 9);
     }
 };
 
 int main() {
+    initRandomNumber();
     populateFighters();
     UserInterface UserInterface;
     UserInterface.displayMenu();
-
     return 0;
 }
