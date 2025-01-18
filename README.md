@@ -1,0 +1,1 @@
+The UFC Simulator is a C++ program that lets users simulate tournaments across multiple weight classes or view detailed fighter stats. Features include dynamic fight commentary, realistic fighter matchups, and easy-to-navigate menus. Simply compile the code, run the program, and choose to start a tournament or explore fighter stats.
